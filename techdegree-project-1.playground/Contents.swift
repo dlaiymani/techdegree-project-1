@@ -1,3 +1,4 @@
+// Part 1: Creation of the data collection
 let player1: [String: Any] = ["Name": "Joe Smith", "Height": 42, "Experience": true, "Guardian": "Jim and Jan Smith" ]
 let player2: [String: Any] = ["Name": "Jill Tanner", "Height": 36, "Experience": true, "Guardian": "Clara Tanner" ]
 let player3: [String: Any] = ["Name": "Bill Bon", "Height": 43, "Experience": true, "Guardian": "Sara and Jenny Bon" ]
@@ -23,6 +24,7 @@ var teamSharks: [[String: Any]] = []
 var teamDragons: [[String: Any]] = []
 var teamRaptors: [[String: Any]] = []
 
+// Part 2: Function that affect a player to a team
 func putPlayer(_ player: [String: Any], in teamNumber: Int) {
     switch teamNumber {
         case 0:
@@ -34,14 +36,30 @@ func putPlayer(_ player: [String: Any], in teamNumber: Int) {
     }
 }
 
-func printTeam(_ team: [[String: Any]]) {
-    for player in team {
-        print("\(player["Name"]) - \(player["Experience"])")
+// Part 2: Function that create the letters for the player of a team
+func letter(teamName: String, teamPractiseDate: String, teamArray: [[String: Any]]) -> [String] {
+    var letter: [String] = []
+    for player in teamArray {
+        if let guardians = player["Guardian"], let name = player["Name"] {
+            letter += [
+                """
+                --------------------------------------------------------------
+                Dear \(guardians)
+                We are pleased to announce you that \(name) has been affected to the \(teamName) team.
+                The practise date/time is set to \(teamPractiseDate)
+                --------------------------------------------------------------
+                """]
+        }
     }
+    return letter
 }
+
+
+// Part 2: Main
 var numTeamExperienced = 0
 var numTeamNonExperienced = 0
-var teamExperienced: [[String: Any]] = []
+
+// Part 2: For loop that affect the player to the different teams by balancing experinced players
 for player in players {
     let isExperienced = player["Experience"] as! Bool
     if isExperienced == true {
@@ -53,6 +71,14 @@ for player in players {
     }
 }
 
-printTeam(teamRaptors)
+// Part 3: Creation of the lettres collection that contains all the letters
+var letters = letter(teamName: "Sharks", teamPractiseDate: "March 17, 1pm", teamArray: teamSharks) +
+               letter(teamName: "Dragons", teamPractiseDate: "March 17, 3pm", teamArray: teamDragons) +
+                letter(teamName: "Raptors", teamPractiseDate: "March 18, 1pm", teamArray: teamRaptors)
 
+// Part 3: Printing the letters
+for letter in letters {
+    print()
+    print(letter)
+}
 
