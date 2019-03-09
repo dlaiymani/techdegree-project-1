@@ -55,6 +55,7 @@ func nbOfExperienced(team: [[String: Any]]) -> Int {
     return sum
 }
 
+// Function that print the names of the player's team
 func printATeam(_ team: [[String: Any]] ) {
     for player in team {
         print(player["Name"])
@@ -91,7 +92,7 @@ for player in players {
     }
 }
 
-// sorting the two groups in order to balance their repartition in height and in experiences
+// Sorting the two groups in order to balance their repartition in height and in experiences
 teamExperienced.sort{
         (($0 as! Dictionary<String, Any>)["Height"] as! Double) > (($1 as! Dictionary<String, Any>)["Height"] as! Double)
 }
